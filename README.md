@@ -1,7 +1,7 @@
 # Nutri Vital
 
 ## 📌 Status do Projeto
-🚧 Em desenvolvimento
+🚀 Concluído
 
 ## 🛠 Tecnologias Utilizadas
 ### Front-end
