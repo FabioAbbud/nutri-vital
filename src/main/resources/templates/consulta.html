@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutri Vital - Consulta</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <style>
+        .resultado-box {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            min-height: 150px;
+            white-space: pre-line;
+        }
+        .resultado-box p {
+            margin: 0;
+        }
+        .resultado-box p {
+            margin-bottom: 1em;
+            line-height: 1.6;
+        }
+        .resultado-box p:last-child {
+            margin-bottom: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Responda as perguntas abaixo:</h1>
+        
+        <form id="formConsulta" class="consulta-form">
+            
+            <div class="input-group-radio-consulta">
+                <label>Quantas refeições você faz por dia?</label>
+                </br>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="refeicoes" value="5 ou mais"> 5 ou mais
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="refeicoes" value="4"> 4
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="refeicoes" value="3"> 3
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="refeicoes" value="2"> 2
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="refeicoes" value="1"> 1
+                    </label>
+                </div>
+            </div>
+
+           
+            <div class="input-group-radio-consulta">
+                <label>Com que frequência você consome frutas?</label>
+                </br>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="frutas" value="Todos os dias"> Todos os dias
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="frutas" value="Frequentemente"> Frequentemente
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="frutas" value="Consumo pouco"> Consumo pouco
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="frutas" value="Não consumo"> Não consumo
+                    </label>
+                </div>
+            </div>
+
+            
+            <div class="input-group-radio-consulta">
+                <label>Com que frequência você pratica exercícios físicos?</label>
+                </br>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="exercicios" value="Muito ativo"> Muito ativo
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="exercicios" value="Ativo"> Ativo
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="exercicios" value="Moderadamente ativo"> Moderadamente ativo
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="exercicios" value="Sedentário"> Sedentário
+                    </label>
+                </div>
+            </div>
+
+            
+            <div class="input-group-radio-consulta">
+                <label>Como você avalia a qualidade do seu sono?</label>
+                </br>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="sono" value="Muito boa"> Muito boa
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="sono" value="Boa"> Boa
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="sono" value="Ruim"> Ruim
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="sono" value="Muito ruim"> Muito ruim
+                    </label>
+                </div>
+            </div>
+
+            
+            <div class="resultado-box" id="resultado">
+                <p>Aqui aparecerá o resultado da sua consulta...</p>
+            </div>
+
+            <div class="button-group consulta-buttons">
+                <a th:href="@{/menu}" class="btn">Voltar</a>
+                <button type="button" id="btnConsultar" class="btn btn-consultar">
+                    Consultar <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/script.js"></script>
+    </body>
+</html>

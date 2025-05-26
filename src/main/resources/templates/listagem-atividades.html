@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutri Vital - Atividades Físicas</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container-lista">
+        <h1>Registro de Atividades Físicas</h1>
+        <p class="subheading">Faça aqui o registro de suas atividades praticadas hoje</p>
+
+        <div class="tabela-container">
+            <table class="tabela-usuarios">
+                <thead>
+                    <tr>
+                        <th>Tipo de exercício</th>
+                        <th>Duração</th>
+                        <th>Intensidade</th>
+                        <th>Dia</th>
+                        <th>Hora</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="atividade : ${atividades}">
+                            <td th:text="${atividade.tipo}"></td>
+                            <td th:text="${atividade.duracaoMinutos} + ' min'"></td> <!-- Corrigido aqui -->
+                            <td th:text="${atividade.intensidade}"></td>
+                            <td th:text="${#temporals.format(atividade.dia, 'dd/MM/yyyy')}"></td>
+                            <td th:text="${#temporals.format(atividade.hora, 'HH:mm')}"></td> <!-- Corrigido aqui -->
+                            <td>
+                                <button class="btn-excluir" th:data-id="${atividade.idAtividade}">
+                                    <i class="fas fa-trash"></i> Excluir
+                                </button>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-button-group">
+            <button type="button" class="menu-btn" onclick="window.history.back()">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </button>
+            <button type="button" class="menu-btn" onclick="abrirModalExercicio()">
+                <i class="fas fa-plus"></i> Registrar novo exercício
+            </button>
+        </div>
+    </div>
+    
+    <div id="modalExercicio" class="modal-overlay">
+        <div class="modal-container">
+            <button class="fechar-modal" onclick="fecharModal()">×</button>
+            
+            <h2>Registro de exercícios</h2>
+            <p class="subheading-modal">Preencha os dados do exercício realizado</p>
+            
+            <form id="formExercicio" class="form-modal">
+                <div class="input-group-modal">
+                    <label for="tipo-exercicio">Tipo de exercício:</label>
+                    <select id="tipo-exercicio" class="select-style" required>
+                        <option value="">Selecione...</option>
+                        <option value="musculacao">Musculação</option>
+                        <option value="aerobico">Aerobico</option>
+                        <option value="esporte">Esporte</option>
+                        <option value="pilates">Pilates</option>
+                    </select>
+                </div>
+                
+                <div class="input-row-modal">
+                    <div class="input-group-modal half-width">
+                        <label for="duracao">Duração (minutos):</label>
+                        <input id="duracao" type="number" min="1" max="300" required>
+                    </div>
+                    
+                    <div class="input-group-modal half-width">
+                        <label>Intensidade:</label>
+                        <div class="radio-group-modal">
+                            <label class="radio-option-modal">
+                                <input type="radio" name="intensidade" value="leve" required> Leve
+                            </label>
+                            <label class="radio-option-modal">
+                                <input type="radio" name="intensidade" value="moderada"> Moderada
+                            </label>
+                            <label class="radio-option-modal">
+                                <input type="radio" name="intensidade" value="alta"> Alta
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-row-modal">
+                    <div class="input-group-modal half-width">
+                        <label for="dia">Dia:</label>
+                        <input id="dia" type="date" required>
+                    </div>
+                    
+                    <div class="input-group-modal half-width">
+                        <label for="hora">Horário:</label>
+                        <input id="hora" type="time" required>
+                    </div>
+                </div>
+                
+                <div class="modal-button-group">
+                    <button type="button" class="btn-modal btn-voltar" onclick="fecharModalExercicio()">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </button>
+                    <button type="reset" class="btn-modal btn-limpar">
+                        <i class="fas fa-eraser"></i> Limpar
+                    </button>
+                    <button type="submit" class="btn-modal btn-enviar">
+                        <i class="fas fa-check"></i> Enviar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutri Vital - Administrador</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+.container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .tabela-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        .tabela-usuarios {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .tabela-usuarios th, .tabela-usuarios td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .tabela-usuarios th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .tabela-usuarios tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Painel Administrativo</h1>
+        <p class="subheading">Lista de todos os usuários cadastrados</p>
+
+        <div class="tabela-container">
+            <table class="tabela-usuarios">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Peso (kg)</th>
+                        <th>Altura (m)</th>
+                        <th>IMC</th>
+                        <th>Tipo</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="usuario : ${usuarios}">
+                        <td th:text="${usuario.idUsuario}"></td>
+                        <td th:text="${usuario.nome}"></td>
+                        <td th:text="${usuario.peso} ?: '-'"></td>
+                        <td th:text="${usuario.altura} ?: '-'"></td>
+                        <td th:text="${usuario.imc} ?: '-'"></td>
+                        <td th:text="${usuario.nivel}"></td>
+                        <td>
+
+                        <button class="btn btn-excluir" th:data-id="${usuario.idUsuario}">
+                            <i class="fas fa-trash"></i> Excluir
+                        </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="button-group">
+            <button type="button" class="btn btn-voltar" onclick="window.history.back()">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>      
+
+$(document).ready(function() {
+    // Exclusão via AJAX
+    $('.btn-excluir').click(function() {
+        const idUsuario = $(this).data('id');
+        
+        if (confirm('Tem certeza que deseja excluir este usuário permanentemente?')) {
+            $.ajax({
+                url: '/usuarios/excluir/' + idUsuario,
+                type: 'POST',
+                success: function(response) {
+                    location.reload(); // Recarrega a página após exclusão
+                },
+                error: function(xhr) {
+                    alert('Erro ao excluir usuário: ' + xhr.responseText);
+                }
+            });
+        }
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutri Vital - Cadastro</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro</h1>
+        <p class="subheading">Insira seus dados abaixo para acessar o Nutri Vital</p>
+
+        <form th:action="@{/usuario/cadastrar}" th:object="${usuario}" method="post">
+            <div class="input-group">
+                <label for="nome"><i class="fas fa-user"></i> Nome:</label>
+                <input type="text" id="nome" th:field="*{nome}" required>
+            </div>
+
+            <div class="input-group">
+                <label for="senha"><i class="fas fa-lock"></i> Senha:</label>
+                <input type="password" id="senha" th:field="*{senha}" required>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group half-width">
+                    <label for="peso"><i class="fas fa-weight"></i> Peso (kg):</label>
+                    <input type="number" id="peso" th:field="*{peso}" step="0.1" required>
+                </div>
+
+                <div class="input-group half-width">
+                    <label for="altura"><i class="fas fa-ruler-vertical"></i> Altura (m):</label>
+                    <input type="number" id="altura" th:field="*{altura}" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="nivel"><i class="fas fa-user-tag"></i> Tipo de usuário:</label>
+                <select id="nivel" th:field="*{nivel}" class="select-style">
+                    <option value="PADRAO">PADRÃO</option>
+                    <option value="PREMIUM">PREMIUM</option>
+                    <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+                </select>
+            </div>
+
+            <div class="button-group">
+                <a th:href="@{/}" class="btn">Voltar</a>
+                <button type="submit" class="btn btn-cadastrar">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutri Vital - Menu Principal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bem vindo(a) ao Nutri Vital</h1>
+        <p class="subheading">Selecione uma das funções abaixo e comece já</p>
+
+        <div class="menu-button-group">
+            <a th:href="@{/listagem-atividades}" class="menu-btn">
+                <i class="fas fa-running"></i> Registrar atividades
+            </a>
+            <a th:href="@{/listagem-refeicoes}" class="menu-btn">
+                <i class="fas fa-utensils"></i> Registrar alimentação
+            </a>
+            
+            <!-- Botão de Consulta apenas para Premium -->
+            <a th:href="@{/consulta}" class="menu-btn" th:if="${ehPremium}">
+                <i class="fas fa-book-medical"></i> Consultar
+            </a>
+        </div>
+        </br>
+        <div class="logout-btn">
+            <a th:href="@{/logout}" class="btn">
+                <i class="fas fa-sign-out-alt"></i> Sair
+            </a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutri Vital - Registro de Refeições</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container-lista">
+        <h1>Registro de Refeições</h1>
+        <p class="subheading">Faça aqui o registro de suas refeições</p>
+
+        <div class="tabela-container">
+            <table class="tabela-refeicoes">
+                <thead>
+                    <tr>
+                        <th>Alimento</th>
+                        <th>Quantidade</th>
+                        <th>Kcal</th>
+                        <th>Data</th>
+                        <th>Horário</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="refeicao : ${refeicoes}">
+                        <td th:text="${refeicao.alimento}"></td>
+                        <td th:text="${refeicao.quantidade}"></td>
+                        <td th:text="${refeicao.kcal}"></td>
+                        <td th:text="${#temporals.format(refeicao.data, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${#temporals.format(refeicao.hora, 'HH:mm')}"></td>
+                        <td>
+                            <button class="btn-excluir" th:data-id="${refeicao.idRefeicao}">
+                                <i class="fas fa-trash"></i> Excluir
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="info-calorias">
+            <p>Total de calorias hoje: <span id="total-calorias">0</span> kcal</p>
+        </div>
+
+        <div class="menu-button-group">
+            <button type="button" class="menu-btn" onclick="window.history.back()">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </button>
+            <button type="button" class="menu-btn" onclick="abrirModalRefeicao()">
+                <i class="fas fa-plus"></i> Registrar nova refeição
+            </button>
+            <button type="button" class="menu-btn btn-calcular" onclick="calcularTotalCalorias()">
+                <i class="fas fa-calculator"></i> Somar Kcal
+            </button>
+        </div>
+    </div>
+
+    <div id="modalRefeicao" class="modal-overlay">
+        <div class="modal-container">
+            <button class="fechar-modal" onclick="fecharModalRefeicao()">×</button>
+            
+            <h2>Registro de Refeições</h2>
+            <p class="subheading-modal">Preencha os dados da refeição</p>
+            
+            <form id="formRefeicao" class="form-modal">
+                <div class="input-group-modal">
+                    <label for="alimento">Alimento ingerido:</label>
+                    <input id="alimento" type="text" required>
+                </div>
+                
+                <div class="input-row-modal">
+                    <div class="input-group-modal half-width">
+                        <label for="quantidade">Quantidade (g):</label>
+                        <input id="quantidade" type="number" min="1" required>
+                    </div>
+                    
+                    <div class="input-group-modal half-width">
+                        <label for="kcal">Kcal:</label>
+                        <input id="kcal" type="number" min="1" required>
+                    </div>
+                </div>
+                
+                <div class="input-row-modal">
+                    <div class="input-group-modal half-width">
+                        <label for="data-refeicao">Dia:</label>
+                        <input id="data-refeicao" type="date" required>
+                    </div>
+                    
+                    <div class="input-group-modal half-width">
+                        <label for="hora-refeicao">Horário:</label>
+                        <input id="hora-refeicao" type="time" required>
+                    </div>
+                </div>
+                
+                <div class="modal-button-group">
+                    <button type="button" class="btn-modal btn-voltar" onclick="fecharModalRefeicao()">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </button>
+                    <button type="reset" class="btn-modal btn-limpar">
+                        <i class="fas fa-eraser"></i> Limpar
+                    </button>
+                    <button type="submit" class="btn-modal btn-enviar">
+                        <i class="fas fa-check"></i> Enviar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
